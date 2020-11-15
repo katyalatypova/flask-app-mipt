@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+    <title>Контроль расходов</title>
+    
+<style>
+
+.center {
+    width: 600px; /* Ширина элемента в пикселах */
+    margin: 0 auto;
+    min-height: 500px; 
+    background-color: #F2E3B6;
+    border-radius: 15px;
+   }
+
+h1 {
+  color:black;
+}
+
+.center-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+}
+
+.submit-button {
+    align-self: center;
+}   
+
+input,
+select {
+	margin: 0 auto;
+	width: auto;
+	margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+button {
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  width: 180px;
+}
+
+button:hover {
+  background-color: #284039;
+  color: white;
+}
+
+.table {
+	display: flex;
+	justify-content: center; 
+	flex-wrap: wrap; 
+	flex-direction: column;
+}
+
+td {
+  padding: 10px;
+}
+
+body {
+	background-color: #284039;
+}
+
+</style>
+  
+  
+</head>
+
+<body>
+
+<div class="center">
+
+  <div class="center-wrap">
+  <!-- <div class="form-wrap"> -->
+      <h1>Добавить расход</h1>
+
+
+  <form action="/table" class="'inputtext" method="post">
+    <div class="form-wrap">
+
+    <input type="text" class="input-field" placeholder="Дата ДД.ММ.ГГГГ" name="date"/>
+    <input type="text" class="input-field" placeholder="Сумма в руб." name="amount"/>
+           
+      <select name="category">
+        <option selected value="Другое">Категория</option>
+        <option value="Супермаркеты">Супермаркеты</option>
+        <option value="Транспорт">Транспорт</option>
+        <option value="Коммунальные услуги">Коммунальные услуги</option>
+        <option value="Развлечения">Развлечения</option>
+        <option value="Другое">Другое</option>
+      </select>
+   
+      <input type="text" class="input-field" placeholder="Комментарий" name="comment"/>
+
+      <button type="submit" class="submit-button">Добавить</button>
+      </div>
+
+  </form>
+
+
+  <h1>Расходы</h1>
+  
+  <div class="table">
+
+      
+
+  <table>
+    <colgroup>
+      <col span="4" style="background-color:White"><!-- С помощью этой конструкции задаем цвет фона для столбцов таблицы-->
+    </colgroup>
+    <tr>
+      <th>Дата</th>
+      <th>Сумма, руб.</th>
+      <th>Категория</th>
+      <th>Комментарий</th>
+    </tr>
+      {% for post in history %}
+    <tr>
+      <td>{{ post.date }}</td>
+      <td>{{ post.amount }}</td>
+      <td>{{ post.category }}</td>
+      <td>{{ post.comment }}</td>
+    </tr>
+        {% else %}
+    	  Добавьте первый расход!
+        {% endfor %}
+  </table>
+
+  </div>
+
+
+<h1>Анализ расходов</h1>
+
+  <form action="/analysis" class="'inputtext" method="post">
+    <div class="form-wrap">
+
+    <input type="text" class="input-field" placeholder="Начало периода ДД.ММ.ГГГГ" name="start"/>
+    <input type="text" class="input-field" placeholder="Конец периода ДД.ММ.ГГГГ" name="stop"/>
+    <input type="text" class="input-field" placeholder="Суммировать по n дней" name="date_window"/>
+
+      <button type="submit" class="submit-button">Проанализировать</button>
+      </div>
+
+  </form>
+
+
+<p><img src='./templates/money.png' alt="Попробуйте проанализировать расходы!"></p>
+
+</div>
+</div> 
+
+<!-- center -->
+
+</body>
+</html>

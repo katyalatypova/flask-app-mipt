@@ -1,0 +1,11 @@
+version: "3"
+services:
+  postgres:
+    build: postgres/
+    ports:
+      - 5432:5432
+  web:
+    build: web/
+    network_mode: host
+    depends_on:
+      - postgres
