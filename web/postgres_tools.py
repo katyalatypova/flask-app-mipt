@@ -56,7 +56,7 @@ def read_table_htmlfriendly():
     except psycopg2.errors.UndefinedTable:
         connection.close()
         connection = create_connection("postgres", "postgres", "postgres", "127.0.0.1", "5432")
-        create_table(connection, file_path='../data/init.sql')
+        create_table(connection, file_path='data/init.sql')
         
     finally:
         connection.close()
@@ -84,7 +84,7 @@ def read_table_framefriendly():
     except psycopg2.errors.UndefinedTable:
         connection.close()
         connection = create_connection("postgres", "postgres", "postgres", "127.0.0.1", "5432")
-        create_table(connection, file_path='../data/init.sql')
+        create_table(connection, file_path='data/init.sql')
         
     finally:
         connection.close()
