@@ -13,7 +13,9 @@ Final task
 
 все упадет! 
 
-Как запустить у себя приложение локально (без docker-compose):
+Как запустить у себя приложение локально:
+
+**Вариант без docker-compose**
 
 1) Запускаем postgres
 
@@ -27,4 +29,12 @@ Final task
 
 `cd web`
 
+`pip install -r requirements.txt`
+
 `python app.py`
+
+**Вариант с docker-copmose**:
+
+`docker-compose up`
+
+В консоли появится ссылка, которую нужно открыть в браузере.
