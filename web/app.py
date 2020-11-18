@@ -1,7 +1,7 @@
 import time
 import psycopg2
 import os
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, render_template_string
 from postgres_tools import * 
 from analysis_tools import *
 
@@ -39,8 +39,10 @@ def analyse():
             frame_dict = read_table_framefriendly()
             if frame_dict:
                 plot_heatmap(frame_dict, start, stop, date_window)
-
-    return render_template('analysis.html')
+    with open('templates/analysis.html') as file_:
+        code = file_.read()
+		
+    return render_template_string(code)
 
 @app.errorhandler(404)
 def not_found(error):
