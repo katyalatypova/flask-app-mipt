@@ -1,6 +1,6 @@
 import time
 import psycopg2
-
+import os
 from flask import Flask, render_template, url_for, request
 from postgres_tools import * 
 from analysis_tools import *
@@ -10,8 +10,6 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/table', methods=['GET', 'POST'])
 def get_data():
-
-    print(request)
 
     if request.method == 'POST':
 
@@ -31,8 +29,6 @@ def get_data():
 @app.route('/analysis', methods=['GET', 'POST'])
 def analyse():
 
-    print(request)
-    
     if request.method == 'POST':
         start = request.form['start']
         stop = request.form['stop']
@@ -44,7 +40,7 @@ def analyse():
             if frame_dict:
                 plot_heatmap(frame_dict, start, stop, date_window)
 
-    return render_template('index.html', history=read_table_htmlfriendly())
+    return render_template('analysis.html')
 
 @app.errorhandler(404)
 def not_found(error):

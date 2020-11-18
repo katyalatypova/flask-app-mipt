@@ -64,6 +64,7 @@ button:hover {
 	display: flex;
 	justify-content: center; 
 	flex-wrap: wrap; 
+	flex-direction: column;
 }
 
 td {
@@ -111,10 +112,11 @@ body {
   </form>
 
 
-
+  <h1>Расходы</h1>
+  
   <div class="table">
 
-      <h1>Расходы</h1>
+      
 
   <table>
     <colgroup>
@@ -139,8 +141,26 @@ body {
   </table>
 
   </div>
+
+
+<h1>Анализ расходов</h1>
+
+  <form action="/analysis" class="'inputtext" method="post">
+    <div class="form-wrap">
+
+    <input type="text" class="input-field" placeholder="Начало периода ДД.ММ.ГГГГ" name="start"/>
+    <input type="text" class="input-field" placeholder="Конец периода ДД.ММ.ГГГГ" name="stop"/>
+    <input type="text" class="input-field" placeholder="Суммировать по n дней" name="date_window"/>
+
+      <button type="submit" class="submit-button">Проанализировать</button>
+      </div>
+
+  </form>
+
+
 </div>
 </div> 
+
 <!-- center -->
 
 </body>

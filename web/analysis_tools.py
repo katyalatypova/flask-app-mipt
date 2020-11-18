@@ -1,7 +1,6 @@
-import matplotlib.pyplot as plt 
 import numpy as np
 import pandas as pd 
-import seaborn as sns
+import plotly.graph_objects as go
 from datetime import datetime
 
 
@@ -43,6 +42,21 @@ def plot_heatmap(data, start, stop, date_window):
 	grouped_data = group_data(df, start, stop, date_window)
 
 	table = pd.pivot_table(grouped_data, index='category', columns='date', values='amount', aggfunc=np.sum)
-	sns.heatmap(table, cmap='viridis', annot=True)
-	plt.savefig('templates/money.png')
+
+	fig = go.Figure(
+	    data=go.Heatmap(
+		z=table,  # данные
+		x=table.columns,  # имена столбцов 
+		y=table.index,  # имена строк
+		colorscale='Viridis'  # цветовая схема
+	    )
+	)
+
+	fig.update_layout(
+	    title='Расходы по периодам',
+	    xaxis_nticks=len(table.index)
+	)
+
+	fig.write_html("templates/analysis.html")
+	
 	return 0

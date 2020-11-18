@@ -6,6 +6,8 @@ services:
       - 5432:5432
   web:
     build: web/
+    volumes:
+        - ./web/templates:/templates
     network_mode: host
     depends_on:
       - postgres
